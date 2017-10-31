@@ -1,4 +1,4 @@
-{% if note_book %}
+<!-- {% if note_book %}
   <ul>
     {% for note in note_book %}
       <li>
@@ -12,6 +12,30 @@
   </ul>
 {% else %}
   <p>No notes are available</p>
+{% endif %}
+<a href="add/"><button type="button">Add new entry</button></a>
+<a href="{% url 'logout' %}"><button type="button">logout</button></a> -->
+
+{% if note_book %}
+<table style="width:50%">
+  <tr>
+    <th>Title</th>
+    <th>Created</th>
+    <th></th>
+    <th></th>
+  </tr>
+  {% for note in note_book %}
+  <tr>
+    <td>{{note.title}}</td>
+    <td>{{note.created}}</td>
+    <td><a href="{% url 'notebook:detail' note.id %}"><button type="button">open</button></a></td>
+    <td><a href="{% url 'notebook:edit' note.id %}"><button type="button">edit</button></a></td>
+    <td><a href="{% url 'notebook:delete' note.id %}"><button type="button">delete</button></a></td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %}
+<p>No notes are available</p>
 {% endif %}
 <a href="add/"><button type="button">Add new entry</button></a>
 <a href="{% url 'logout' %}"><button type="button">logout</button></a>
