@@ -1,0 +1,16 @@
+{% if note_books %}
+  <ul>
+    {% for notebook in note_books %}
+      <li>
+        <a href="{% url 'notebook:all-notebooks' notebook.id %}" >
+          {{notebook.name}}
+        </a>
+        <a href="{% url 'notebook:delete-notebook' notebook.id %}"><button type="button">delete</button></a>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No notes are available</p>
+{% endif %}
+<a href="add-notebook/"><button type="button">Add new notebook</button></a>
+<a href="{% url 'logout' %}"><button type="button">logout</button></a>

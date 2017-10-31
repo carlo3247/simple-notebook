@@ -5,15 +5,23 @@ from django.urls import reverse_lazy
 
 from django.http import HttpResponse
 
-from .models import Note
+from .models import Note, Notebook
+
+class NotebookView(generic.ListView):
+    template_name = 'notebook/overview.html'
+
+    context_object_name = 'note_books'
+
+    def get_queryset(self):
+        return Notebook.objects.all()
 
 class NoteView(generic.ListView):
     template_name = 'notebook/note.html'
 
-    context_object_name = 'note_book'
+    context_object_name = 'notes'
 
     def get_queryset(self):
-        return Note.objects.all()
+        return Note.objects.filter(notebook__exact=1)
 
 class DetailedNote(generic.DetailView):
     model = Note
@@ -38,5 +46,13 @@ class DeleteNote(generic.edit.DeleteView):
     model = Note
     success_url = reverse_lazy('notebook:home')
 
-def add(request):
-    return HttpResponse("hello")
+
+class AddNotebook(generic.edit.CreateView):
+
+    model = Notebook
+    fields = ['name']
+
+class DeleteNotebook(generic.edit.DeleteView):
+
+    model = Notebook
+    success_url = reverse_lazy('notebook:home')
