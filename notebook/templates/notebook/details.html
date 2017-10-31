@@ -1,0 +1,9 @@
+<h1>{{note.title}}</h1>
+<h2>created on: {{note.created}}</h2>
+{% if error_message %}
+<p><strong>{{error_message}}</strong></p>
+{% endif %}
+
+<p>
+  {{note.text}}
+</p>
