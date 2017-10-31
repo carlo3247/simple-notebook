@@ -10,7 +10,7 @@
   <tr>
     <td>{{note.title}}</td>
     <td>{{note.created}}</td>
-    <td><a href="{% url 'notebook:detail' note.id %}"><button type="button">open</button></a></td>
+    <td><a href="{% url 'notebook:detail-note' note.notebook.id note.id %}"><button type="button">open</button></a></td>
     <td><a href="{% url 'notebook:edit' note.id %}"><button type="button">edit</button></a></td>
     <td><a href="{% url 'notebook:delete' note.id %}"><button type="button">delete</button></a></td>
   </tr>
@@ -19,5 +19,5 @@
 {% else %}
 <p>No notes are available</p>
 {% endif %}
-<a href="{% url 'notebook:add-note' note.notebook.id %}"><button type="button">Add new entry</button></a>
+<a href=""><button type="button">Add new entry</button></a>
 <a href="{% url 'notebook:home' %}"><button type="button">back</button></a>

@@ -2,7 +2,7 @@
   <ul>
     {% for notebook in note_books %}
       <li>
-        <a href="{% url 'notebook:all-notebooks' notebook.id %}" >
+        <a href="{% url 'notebook:all-notes' notebook.id %}" >
           {{notebook.name}}
         </a>
         <a href="{% url 'notebook:delete-notebook' notebook.id %}"><button type="button">delete</button></a>

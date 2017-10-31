@@ -1,9 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.utils import timezone
 from django.urls import reverse_lazy
 
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 
 from .models import Note, Notebook
 
@@ -16,12 +16,15 @@ class NotebookView(generic.ListView):
         return Notebook.objects.all()
 
 class NoteView(generic.ListView):
+
     template_name = 'notebook/note.html'
 
     context_object_name = 'notes'
 
     def get_queryset(self):
-        return Note.objects.filter(notebook__exact=1)
+        notebook = get_object_or_404(Notebook, pk=self.kwargs['pk'])
+        return Note.objects.filter(notebook__exact=notebook)
+
 
 class DetailedNote(generic.DetailView):
     model = Note
@@ -31,10 +34,23 @@ class DetailedNote(generic.DetailView):
     def get_queryset(self):
         return Note.objects.filter(created__lte=timezone.now())
 
+
 class AddNote(generic.edit.CreateView):
 
     model = Note
     fields = ['title', 'text']
+
+    def form_valid(self, form):
+        instance = form.save(commit=False)
+        instance.notebook = get_object_or_404(Notebook, pk=self.kwargs['pk'])
+        instance.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_success_url(self, **kwargs):
+        if  kwargs != None:
+            return reverse_lazy('notebook:all-notes', kwargs = {'pk': self.kwargs['pk']})
+        else:
+            return reverse_lazy('notebook:home')
 
 class EditNote(generic.edit.UpdateView):
 
