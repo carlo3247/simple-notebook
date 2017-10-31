@@ -10,9 +10,9 @@
   <tr>
     <td>{{note.title}}</td>
     <td>{{note.created}}</td>
-    <td><a href="{% url 'notebook:detail-note' note.notebook.id note.id %}"><button type="button">open</button></a></td>
-    <td><a href="{% url 'notebook:edit' note.id %}"><button type="button">edit</button></a></td>
-    <td><a href="{% url 'notebook:delete' note.id %}"><button type="button">delete</button></a></td>
+    <td><a href="{% url 'notebook:detail-note' note.notebook.id forloop.counter %}"><button type="button">open</button></a></td>
+    <td><a href="{% url 'notebook:edit' note.id forloop.counter %}"><button type="button">edit</button></a></td>
+    <td><a href="{% url 'notebook:delete' note.id forloop.counter %}"><button type="button">delete</button></a></td>
   </tr>
   {% endfor %}
 </table>

@@ -17,4 +17,4 @@ class Note(models.Model):
     notebook = models.ForeignKey(Notebook, on_delete=models.CASCADE)
 
     def get_absolute_url(self):
-        return reverse('notebook:detail', kwargs={'pk': self.pk, 'note_id': self.id})
+        return reverse('notebook:home')

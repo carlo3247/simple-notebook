@@ -32,7 +32,8 @@ class DetailedNote(generic.DetailView):
     template_name = 'notebook/details.html'
 
     def get_queryset(self):
-        return Note.objects.filter(created__lte=timezone.now())
+        note_id = self.kwargs['id']
+        return Note.objects.all()
 
 
 class AddNote(generic.edit.CreateView):
@@ -48,7 +49,7 @@ class AddNote(generic.edit.CreateView):
 
     def get_success_url(self, **kwargs):
         if  kwargs != None:
-            return reverse_lazy('notebook:all-notes', kwargs = {'pk': self.kwargs['pk']})
+            return reverse_lazy('notebook:home')
         else:
             return reverse_lazy('notebook:home')
 
@@ -60,7 +61,7 @@ class EditNote(generic.edit.UpdateView):
 class DeleteNote(generic.edit.DeleteView):
 
     model = Note
-    success_url = reverse_lazy('notebook:home')
+    success_url = reverse_lazy('notebook:all-notes')
 
 
 class AddNotebook(generic.edit.CreateView):
