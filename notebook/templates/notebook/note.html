@@ -10,14 +10,14 @@
   <tr>
     <td>{{note.title}}</td>
     <td>{{note.created}}</td>
-    <td><a href="{% url 'notebook:detail-note' note.notebook.id forloop.counter %}"><button type="button">open</button></a></td>
-    <td><a href="{% url 'notebook:edit' note.id forloop.counter %}"><button type="button">edit</button></a></td>
-    <td><a href="{% url 'notebook:delete' note.id forloop.counter %}"><button type="button">delete</button></a></td>
+    <td><a href="{% url 'notebook:detail-note' note.notebook.id note.id %}"><button type="button">open</button></a></td>
+    <td><a href="{% url 'notebook:edit' note.notebook.id note.id %}"><button type="button">edit</button></a></td>
+    <td><a href="{% url 'notebook:delete' note.notebook.id note.id %}"><button type="button">delete</button></a></td>
   </tr>
   {% endfor %}
 </table>
 {% else %}
 <p>No notes are available</p>
 {% endif %}
-<a href=""><button type="button">Add new entry</button></a>
-<a href="{% url 'notebook:home' %}"><button type="button">back</button></a>
+<a href="add-note/"><button type="button">Add new entry</button></a>
+<a href="{% url 'notebook:home'  %}"><button type="button">back</button></a>

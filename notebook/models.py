@@ -16,5 +16,8 @@ class Note(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     notebook = models.ForeignKey(Notebook, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.title
+
     def get_absolute_url(self):
-        return reverse('notebook:home')
+        return reverse('notebook:detail-note', kwargs={'pk': self.notebook.id, 'id': self.id})
