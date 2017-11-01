@@ -7,4 +7,4 @@
 <p>
   {{note.text}}
 </p>
-<input class="btn btn-link" type="button" value="Back" onclick="window.history.go(-1);"/>
+<a href="{% url 'notebook:all-notes' note.notebook.id %}"><button type="button">Back</button></a>

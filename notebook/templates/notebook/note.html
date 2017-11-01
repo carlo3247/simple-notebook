@@ -3,6 +3,8 @@
   <tr>
     <th>Title</th>
     <th>Created</th>
+    <th>Author</th>
+    <th></th>
     <th></th>
     <th></th>
   </tr>
@@ -10,6 +12,7 @@
   <tr>
     <td>{{note.title}}</td>
     <td>{{note.created}}</td>
+    <td>{{note.author}}</td>
     <td><a href="{% url 'notebook:detail-note' note.notebook.id note.id %}"><button type="button">open</button></a></td>
     <td><a href="{% url 'notebook:edit' note.notebook.id note.id %}"><button type="button">edit</button></a></td>
     <td><a href="{% url 'notebook:delete' note.notebook.id note.id %}"><button type="button">delete</button></a></td>

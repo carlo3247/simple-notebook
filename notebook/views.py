@@ -45,12 +45,13 @@ class AddNote(generic.edit.CreateView):
     def form_valid(self, form):
         instance = form.save(commit=False)
         instance.notebook = get_object_or_404(Notebook, pk=self.kwargs['pk'])
+        instance.author = self.request.user
         instance.save()
         return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self, **kwargs):
         if  kwargs != None:
-            return reverse_lazy('notebook:home')
+            return reverse_lazy('notebook:all-notes', kwargs={'pk': self.kwargs['pk']})
         else:
             return reverse_lazy('notebook:home')
 
