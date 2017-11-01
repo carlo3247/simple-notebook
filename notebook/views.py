@@ -7,6 +7,7 @@ from django.http import HttpResponseRedirect
 
 from .models import Note, Notebook
 
+
 class NotebookView(generic.ListView):
     template_name = 'notebook/overview.html'
 
@@ -14,6 +15,7 @@ class NotebookView(generic.ListView):
 
     def get_queryset(self):
         return Notebook.objects.all()
+
 
 class NoteView(generic.ListView):
 
@@ -60,10 +62,32 @@ class EditNote(generic.edit.UpdateView):
     model = Note
     fields = ['title', 'text']
 
+    def get_object(self):
+        note_id = self.kwargs['id']
+        note = get_object_or_404(Note, id=note_id)
+        return note
+
+    def get_success_url(self, **kwargs):
+        if  kwargs != None:
+            return reverse_lazy('notebook:all-notes', kwargs={'pk': self.kwargs['pk']})
+        else:
+            return reverse_lazy('notebook:home')
+
+
 class DeleteNote(generic.edit.DeleteView):
 
     model = Note
-    success_url = reverse_lazy('notebook:all-notes')
+
+    def get_object(self):
+        note_id = self.kwargs['id']
+        note = get_object_or_404(Note, id=note_id)
+        return note
+
+    def get_success_url(self, **kwargs):
+        if  kwargs != None:
+            return reverse_lazy('notebook:all-notes', kwargs={'pk': self.kwargs['pk']})
+        else:
+            return reverse_lazy('notebook:home')
 
 
 class AddNotebook(generic.edit.CreateView):
