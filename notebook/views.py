@@ -31,10 +31,10 @@ class DetailedNote(generic.DetailView):
 
     template_name = 'notebook/details.html'
 
-    def get_queryset(self):
-        # note_id = self.kwargs['id']
-        note_id = 1
-        return Note.objects.filter(id=note_id)
+    def get_object(self):
+        note_id = self.kwargs['id']
+        note = get_object_or_404(Note, id=note_id)
+        return note
 
 
 class AddNote(generic.edit.CreateView):
