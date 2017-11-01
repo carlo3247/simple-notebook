@@ -15,7 +15,6 @@
 import datetime
 import os
 import sys
-import traceback
 
 if sys.version_info[0] == 3:
     def to_str(value):
@@ -56,7 +55,7 @@ if ptvsd_secret:
 
 def get_wsgi_handler(handler_name):
     if not handler_name:
-        raise Exception('WSGI_ALT_VIRTUALENV_HANDLER env var must be set')
+        raise Exception('WSGI_HANDLER env var must be set')
 
     if not isinstance(handler_name, str):
         handler_name = to_str(handler_name)
@@ -66,12 +65,10 @@ def get_wsgi_handler(handler_name):
     callable_name = callable_name[:-2] if should_call else callable_name
     name_list = [(callable_name, should_call)]
     handler = None
-    last_tb = ''
 
     while module_name:
         try:
             handler = __import__(module_name, fromlist=[name_list[0][0]])
-            last_tb = ''
             for name, should_call in name_list:
                 handler = getattr(handler, name)
                 if should_call:
@@ -83,10 +80,9 @@ def get_wsgi_handler(handler_name):
             callable_name = callable_name[:-2] if should_call else callable_name
             name_list.insert(0, (callable_name, should_call))
             handler = None
-            last_tb = ': ' + traceback.format_exc()
 
     if handler is None:
-        raise ValueError('"%s" could not be imported%s' % (handler_name, last_tb))
+        raise ValueError('"%s" could not be imported' % handler_name)
 
     return handler
 
