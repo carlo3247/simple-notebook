@@ -1,2 +1,2 @@
-azure==0.8.4
 Django==1.11.6
+azure==0.8.4
