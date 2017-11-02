@@ -5,6 +5,10 @@ from django.urls import reverse_lazy
 
 from django.http import HttpResponseRedirect
 
+from .forms import SearchForm
+from search_views.search import SearchListView
+from search_views.filters import BaseFilter
+
 from .models import Note, Notebook
 
 
@@ -26,6 +30,20 @@ class NoteView(generic.ListView):
     def get_queryset(self):
         notebook = get_object_or_404(Notebook, pk=self.kwargs['pk'])
         return Note.objects.filter(notebook__exact=notebook)
+
+
+class NoteFilter(BaseFilter):
+    search_fields = {
+        'search_title' : ['title'],
+        'search_text' : ['text'],
+    }
+
+class NoteSearchList(SearchListView):
+    model = Note
+    paginate_by = 30
+    template_name = "notebook/search.html"
+    form_class = SearchForm
+    filter_class = NoteFilter
 
 
 class DetailedNote(generic.DetailView):
