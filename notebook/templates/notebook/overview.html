@@ -46,7 +46,13 @@ body {
 
 </style>
 <div class="overview">
+
   <h1>Notebooks</h1>
+<form method ='GET' action =" ">
+<input type ='text' placeholder ='Search posts' name ='q' value ='{{ request.GET.q }}'/>
+<input type ='submit' value = 'search' />
+</form>
+
     {% if note_books %}
     {% for notebook in note_books %}
       
@@ -76,5 +82,7 @@ body {
      data-ad-client="ca-pub-9155049400353686"
      data-ad-slot="9589048256"
      data-ad-format="auto"></ins>
-
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 </div>
