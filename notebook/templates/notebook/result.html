@@ -3,12 +3,11 @@
 
 <body>
 
-
 {% for obj in object_list %}
 
+<p> {{obj.title}} by {{obj.author}} </p>
+<br/>
 
-{{obj.title}} by
-{{obj.author}}<br/>
 {% endfor %}
 </body>
 </html>

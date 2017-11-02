@@ -39,6 +39,24 @@ class DetailedNote(generic.DetailView):
         return note
 
 
+class Search(generic.ListView):
+    model = Note
+    template_name = 'notebook/result.html'
+
+    def toSearch(request):
+        query = request.GET.get('q')
+        queryset = Note.objects.all()
+        context = {
+        "object_list":queryset,
+        "title":"List"
+        }
+        if query:
+
+            queryset = queryset.filter(Q(title__icontains=query))
+
+        return render(request,"result.html",context)
+
+
 class AddNote(generic.edit.CreateView):
 
     model = Note
