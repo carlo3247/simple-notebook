@@ -3,7 +3,7 @@
 NUM_WORKERS=3
 TIMEOUT=120
 
-# Start Gunicorn processes
+# Start Gunicorn process
 echo Starting Gunicorn.
 exec gunicorn team12scenario.wsgi:application \
     --workers $NUM_WORKERS \
