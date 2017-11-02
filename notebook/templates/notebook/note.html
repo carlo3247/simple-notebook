@@ -25,7 +25,7 @@ tr {
 
 html { width: 100%; height:100%; overflow:hidden; }
 
-body { 
+body {
     width: 100%;
     height:100%;
     font-family: 'Open Sans', sans-serif;
@@ -37,7 +37,7 @@ body {
     background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), linear-gradient(to bottom,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), linear-gradient(135deg,  #670d10 0%,#092756 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3E1D6D', endColorstr='#092756',GradientType=1 );
 }
-.note { 
+.note {
   position: relative;
     top:20%;
     left:30%;
@@ -70,13 +70,13 @@ body {
     <td>{{note.title}}</td>
     <td>{{note.created}}</td>
     <td>{{note.author}}</td>
-    <td><a href="{% url 'notebook:detail-note' note.notebook.id note.id %}" style="text-decoration:none" style="display: inline" class="btn btn-primary btn-block btn-large">Open</button></td>    
+    <td><a href="{% url 'notebook:detail-note' note.notebook.id note.id %}" style="text-decoration:none" style="display: inline" class="btn btn-primary btn-block btn-large">Open</button></td>
 
     <td><a href="{% url 'notebook:edit' note.notebook.id note.id %}" style="text-decoration:none" style="display: inline" class="btn btn-primary btn-block btn-large">Edit</button></td>
 
     <td><a href="{% url 'notebook:delete' note.notebook.id note.id %}" style="text-decoration:none" style="display: inline" class="btn btn-primary btn-block btn-large">Delete</button></td>
-   
-   
+
+
   </tr>
   {% endfor %}
 </table>
@@ -85,14 +85,14 @@ body {
 <h3>No notes are available</h3>
 {% endif %}
 
-<br/> 
+<br/>
 <a href="add-note/" style="text-decoration:none" button type="submit" class="btn btn-primary btn-block2 btn-large">Add new entry</button></a>
 
-<br/> 
+<br/>
 
 <a href="{% url 'notebook:home'  %}" style="text-decoration:none" style="display: inline" button type="submit" class="btn btn-primary btn-block2 btn-large">Back</button>
 
-    <br>
+<br />
 
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- login bootsnipp -->
