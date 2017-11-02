@@ -16,7 +16,7 @@
 
 html { width: 100%; height:100%; overflow:hidden; }
 
-body { 
+body {
     width: 100%;
     height:100%;
     font-family: 'Open Sans', sans-serif;
@@ -28,7 +28,7 @@ body {
     background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), linear-gradient(to bottom,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), linear-gradient(135deg,  #670d10 0%,#092756 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3E1D6D', endColorstr='#092756',GradientType=1 );
 }
-.overview { 
+.overview {
     position: absolute;
     top: 25%;
     left: 50%;
@@ -49,12 +49,12 @@ body {
   <h1>Notebooks</h1>
     {% if note_books %}
     {% for notebook in note_books %}
-      
+
        <p><a href="{% url 'notebook:all-notes' notebook.id %}" style="color:#FFF">
           {{notebook.name}}
         </a>
         <a href="{% url 'notebook:delete-notebook' notebook.id %}" style="text-decoration:none" name = "login" style="display: inline" class="btn btn-primary btn-block btn-large">delete</button></a><br/></p>
-      
+
     {% endfor %}
 
 {% else %}
@@ -63,11 +63,12 @@ body {
 
 <br/>
 
+        <a href="search/" style="text-decoration:none"><button type="submit" name = "search" class="btn btn-primary btn-block2 btn-large">search</button><br/><br/>
         <a href="add-notebook/" style="text-decoration:none"><button type="submit" name = "add" class="btn btn-primary btn-block2 btn-large">Add new notebook</button><br/><br/>
         <a href="{% url 'logout' %}" style="text-decoration:none"><button type="submit" name = "logout" class="btn btn-primary btn-block2 btn-large">Logout</button>
 
 
-    
+
     <br>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- login bootsnipp -->
