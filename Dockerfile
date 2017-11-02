@@ -1,10 +1,11 @@
 # Dockerfile
 
 # FROM directive instructing base image to build upon
-FROM python:2-onbuild
+FROM python:3
 
 # COPY startup script into known file location in container
 COPY start.sh /start.sh
+COPY requirements.txt /requirements.txt
 
 # ENV set environment directory tree
 ENV PROJECT=mysite
@@ -18,7 +19,7 @@ WORKDIR $CONTAINER_PROJECT
 COPY . $CONTAINER_PROJECT
 
 # get modules
-RUN pip install requirements.txt
+RUN pip install -r requirements.txt
 
 # EXPOSE port 8000 to allow communication to/from server
 EXPOSE 8000
